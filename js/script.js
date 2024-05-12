@@ -111,11 +111,12 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener('DOMContentLoaded', function() {
     // Obtém o valor do parâmetro 'shopping' da URL
     const urlParams = new URLSearchParams(window.location.search);
-    const shoppingText = urlParams.get('shopping');
+    const shoppingValue = urlParams.get('shopping');
     
-    // Preenche o input com o texto obtido
-    document.getElementById('shoppingselect').value = shoppingText;
+    // Preenche o input com o valor obtido
+    document.getElementById('shoppingselect').value = shoppingValue;
 });
+
 
 
 
