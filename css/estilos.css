@@ -18,6 +18,10 @@ body {
     text-align: center;
 }
 
+#video {
+    width: 300px;
+}
+
 /* Estilo do campo de entrada */
 #codeInput {
     width: calc(100% - 20px);
