@@ -143,6 +143,26 @@ codeInput.addEventListener('keyup', function(event) {
     }
 });
 
+
+// Evento de clique do botão "Enviar Códigos"
+document.getElementById('sendCodesButton').addEventListener('click', function(event) {
+    // Evita que o formulário seja enviado automaticamente
+    event.preventDefault();
+
+    // Obter o nome do usuário
+    const username = document.getElementById('username').value;
+    // Obter o código selecionado
+    const shoppingSelect = document.getElementById('shoppingselect').value;
+
+    // Preencher os campos hidden do nome do usuário e do código selecionado
+    document.getElementById('username').value = username;
+    document.getElementById('shoppingselect').value = shoppingSelect;
+
+    // Submeter o formulário
+    document.getElementById('barcodeForm').submit();
+});
+
+
 // Inicia o leitor de código de barras ao carregar o documento HTML
 document.addEventListener('DOMContentLoaded', function() {
     startBarcodeReader();
