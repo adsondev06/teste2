@@ -109,11 +109,15 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Obtém o valor do parâmetro 'shopping' da URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const shoppingText = urlParams.get('shopping');
+document.getElementById('shoppingForm').addEventListener('submit', function(event) {
+    event.preventDefault();
     
-    // Preenche o input com o valor obtido
-    document.getElementById('shoppingselect').value = shoppingText;
+    // Captura o texto da opção selecionada no select
+    const selectedOptionText = document.querySelector('.select2 option:checked').textContent;
+    
+    // Cria a URL com o texto da opção selecionada como parâmetro
+    const nextPageURL = `codigos.html?shopping=${encodeURIComponent(selectedOptionText)}`;
+    
+    // Redireciona para a próxima página com o parâmetro
+    window.location.href = nextPageURL;
 });

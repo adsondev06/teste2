@@ -8,24 +8,11 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
-// document.getElementById('shoppingForm').addEventListener('submit', function(event) {
-//     event.preventDefault();
-    
-//     // Captura o valor selecionado no select
-//     const selectedOption = document.querySelector('.select2').value;
-    
-//     // Cria a URL com o valor selecionado como parâmetro
-//     const nextPageURL = `codigos.html?shopping=${selectedOption}`;
-    
-//     // Redireciona para a próxima página com o parâmetro
-//     window.location.href = nextPageURL;
-// });
-
 document.getElementById('shoppingForm').addEventListener('submit', function(event) {
     event.preventDefault();
     
     // Captura o texto da opção selecionada no select
-    const selectedOptionText = document.querySelector('.select2 option:checked').innerText;
+    const selectedOptionText = document.querySelector('.select2 option:checked').textContent;
     
     // Cria a URL com o texto da opção selecionada como parâmetro
     const nextPageURL = `codigos.html?shopping=${encodeURIComponent(selectedOptionText)}`;
@@ -33,4 +20,3 @@ document.getElementById('shoppingForm').addEventListener('submit', function(even
     // Redireciona para a próxima página com o parâmetro
     window.location.href = nextPageURL;
 });
-
