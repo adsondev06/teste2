@@ -144,23 +144,35 @@ codeInput.addEventListener('keyup', function(event) {
 });
 
 
-// Evento de clique do botão "Enviar Códigos"
-document.getElementById('sendCodesButton').addEventListener('click', function(event) {
-    // Evita que o formulário seja enviado automaticamente
-    event.preventDefault();
-
-    // Obter o nome do usuário
-    const username = document.getElementById('username').value;
-    // Obter o código selecionado
-    const shoppingSelect = document.getElementById('shoppingselect').value;
-
-    // Preencher os campos hidden do nome do usuário e do código selecionado
-    document.getElementById('username').value = username;
-    document.getElementById('shoppingselect').value = shoppingSelect;
-
-    // Submeter o formulário
-    document.getElementById('barcodeForm').submit();
+document.addEventListener("DOMContentLoaded", function() {
+    // Verifica se existe um nome de usuário armazenado no LocalStorage
+    const username = localStorage.getItem('username');
+    
+    // Se existir, preenche o campo de username com os dados do LocalStorage
+    if (username) {
+        document.getElementById('username').value = username;
+    }
+    
+    // Adiciona o evento de click ao botão de envio
+    document.getElementById('sendCodesButton').addEventListener('click', function(event) {
+        event.preventDefault();
+        
+        // Captura o valor selecionado no select
+        const selectedOption = document.getElementById('shoppingSelect');
+        
+        // Verifica se o elemento foi encontrado antes de acessar sua propriedade value
+        if (selectedOption) {
+            const selectedValue = selectedOption.value;
+            
+            // Envia o formulário com o valor selecionado do shopping
+            document.getElementById('shoppingselect').value = selectedValue;
+            document.getElementById('barcodeForm').submit();
+        } else {
+            console.error("Elemento shoppingSelect não encontrado.");
+        }
+    });
 });
+
 
 
 // Inicia o leitor de código de barras ao carregar o documento HTML
