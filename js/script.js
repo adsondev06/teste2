@@ -107,3 +107,13 @@ codeInput.addEventListener('keyup', function(event) {
 document.addEventListener('DOMContentLoaded', function() {
     startBarcodeReader();
 });
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Obtém o valor do parâmetro 'shopping' da URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const shoppingValue = urlParams.get('shopping');
+    
+    // Preenche o input com o valor obtido
+    document.getElementById('shoppingselect').value = shoppingValue;
+});
