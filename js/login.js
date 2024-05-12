@@ -1,10 +1,28 @@
-const usernameInput = document.getElementById('username').value;
-const savedUsername = localStorage.getItem('username');
+// Função para verificar se o usuário está logado
+function checkLogin() {
+    const savedUsername = localStorage.getItem('username');
+    const savedExpirationDate = localStorage.getItem('expirationDate');
+    if (savedUsername && savedExpirationDate) {
+        const currentTime = new Date().getTime();
+        if (currentTime < savedExpirationDate) {
+            // Se o usuário estiver logado e o tempo de expiração não tiver sido alcançado, redirecionar para a shopping.html
+            window.location.href = 'shopping.html';
+        } else {
+            // Se o tempo de expiração tiver sido alcançado, remover os dados de login
+            localStorage.removeItem('username');
+            localStorage.removeItem('expirationDate');
+        }
+    }
+}
 
-if (savedUsername === usernameInput) {
-    // Se o nome de usuário inserido for o mesmo que o armazenado, redirecionar para o shopping.html
-    window.location.href = 'shopping.html';
-} else {
+// Verificar sempre que a página é carregada
+checkLogin();
+
+// Evento de envio do formulário de login
+document.getElementById('loginForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const usernameInput = document.getElementById('username').value;
+
     // Salvar o nome do usuário no localStorage
     localStorage.setItem('username', usernameInput);
 
@@ -15,6 +33,6 @@ if (savedUsername === usernameInput) {
     // Salvar o tempo de expiração no localStorage
     localStorage.setItem('expirationDate', expirationDate);
 
-    // Redirecionar para o shopping.html
+    // Redirecionar para a shopping.html
     window.location.href = 'shopping.html';
-}
+});
