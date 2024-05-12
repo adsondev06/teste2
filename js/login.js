@@ -6,7 +6,7 @@
         const currentTime = new Date().getTime();
         if (currentTime < expirationDate) {
             // Se o usuário estiver logado e o tempo de expiração não tiver sido alcançado, redirecionar para o indexform.html
-            window.location.href = 'codigos.html';
+            window.location.href = 'shopping.html';
         } else {
             // Limpar os dados de login do localStorage se o tempo de expiração tiver sido alcançado
             localStorage.removeItem('username');
@@ -36,5 +36,5 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
     localStorage.setItem('expirationDate', expirationDate);
 
     // Redirecionar para o indexform.html
-    window.location.href = 'codigos.html';
+    window.location.href = 'shopping.html';
 });
