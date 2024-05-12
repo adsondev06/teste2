@@ -12,7 +12,7 @@ document.getElementById('shoppingForm').addEventListener('submit', function(even
     event.preventDefault();
     
     // Captura o texto da opção selecionada no select
-    const selectedOptionText = document.querySelector('.select2 option:checked').textContent;
+    const selectedOptionText = document.querySelector('.select2 option:checked').innerText;
     
     // Cria a URL com o texto da opção selecionada como parâmetro
     const nextPageURL = `codigos.html?shopping=${encodeURIComponent(selectedOptionText)}`;

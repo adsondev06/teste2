@@ -108,16 +108,14 @@ document.addEventListener('DOMContentLoaded', function() {
     startBarcodeReader();
 });
 
-
-document.getElementById('shoppingForm').addEventListener('submit', function(event) {
-    event.preventDefault();
+document.addEventListener('DOMContentLoaded', function() {
+    // Obtém o valor do parâmetro 'shopping' da URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const shoppingText = urlParams.get('shopping');
     
-    // Captura o texto da opção selecionada no select
-    const selectedOptionText = document.querySelector('.select2 option:checked').textContent;
-    
-    // Cria a URL com o texto da opção selecionada como parâmetro
-    const nextPageURL = `codigos.html?shopping=${encodeURIComponent(selectedOptionText)}`;
-    
-    // Redireciona para a próxima página com o parâmetro
-    window.location.href = nextPageURL;
+    // Preenche o input com o texto obtido
+    document.getElementById('shoppingselect').value = shoppingText;
 });
+
+
+
