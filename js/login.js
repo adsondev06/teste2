@@ -1,16 +1,18 @@
-// Função para verificar se o usuário está logado
-function checkLogin() {
-    const savedUsername = localStorage.getItem('username');
-    const savedExpirationDate = localStorage.getItem('expirationDate');
-    if (savedUsername && savedExpirationDate) {
+  // Função para verificar se o usuário está logado
+  function checkLogin() {
+    const username = localStorage.getItem('username');
+    const expirationDate = localStorage.getItem('expirationDate');
+    if (username && expirationDate) {
         const currentTime = new Date().getTime();
-        if (currentTime < savedExpirationDate) {
-            // Se o usuário estiver logado e o tempo de expiração não tiver sido alcançado, redirecionar para a shopping.html
+        if (currentTime < expirationDate) {
+            // Se o usuário estiver logado e o tempo de expiração não tiver sido alcançado, redirecionar para o indexform.html
             window.location.href = 'shopping.html';
         } else {
-            // Se o tempo de expiração tiver sido alcançado, remover os dados de login
+            // Limpar os dados de login do localStorage se o tempo de expiração tiver sido alcançado
             localStorage.removeItem('username');
             localStorage.removeItem('expirationDate');
+            // Redirecionar para a página de login
+            window.location.href = 'index.html';
         }
     }
 }
@@ -21,18 +23,18 @@ checkLogin();
 // Evento de envio do formulário de login
 document.getElementById('loginForm').addEventListener('submit', function(event) {
     event.preventDefault();
-    const usernameInput = document.getElementById('username').value;
-
+    const username = document.getElementById('username').value;
+    
     // Salvar o nome do usuário no localStorage
-    localStorage.setItem('username', usernameInput);
+    localStorage.setItem('username', username);
 
-    // Definir o tempo de expiração para 6 horas (em milissegundos)
-    const expirationTime = 6 * 60 * 60 * 1000; // 6 horas
+    // Definir o tempo de expiração para 8 horas (em milissegundos)
+    const expirationTime = 6 * 60 * 60 * 1000; // 8 horas
     const expirationDate = new Date().getTime() + expirationTime;
 
     // Salvar o tempo de expiração no localStorage
     localStorage.setItem('expirationDate', expirationDate);
 
-    // Redirecionar para a shopping.html
+    // Redirecionar para o indexform.html
     window.location.href = 'shopping.html';
 });
