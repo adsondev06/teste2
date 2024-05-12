@@ -143,7 +143,7 @@ codeInput.addEventListener('keyup', function(event) {
     }
 });
 
-
+//daqui pra baix
 document.addEventListener("DOMContentLoaded", function() {
     // Verifica se existe um nome de usuário armazenado no LocalStorage
     const username = localStorage.getItem('username');
@@ -153,29 +153,57 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById('username').value = username;
     }
     
-    // Adiciona o evento de click ao botão de envio
-    document.getElementById('sendCodesButton').addEventListener('click', function(event) {
+    // Inicializa o select2
+    $('.select2').select2();
+    
+    // Adiciona o evento de submit ao formulário
+    document.getElementById('shoppingForm').addEventListener('submit', function(event) {
         event.preventDefault();
         
         // Captura o valor selecionado no select
-        const selectedOption = document.getElementById('shoppingSelect');
+        const selectedOption = document.getElementById('shoppingSelect').value;
         
         // Verifica se o elemento foi encontrado antes de acessar sua propriedade value
         if (selectedOption) {
-            const selectedValue = selectedOption.value;
+            const codigos = document.getElementById('codeInput').value;
+            const username = document.getElementById('username').value;
             
-            // Preenche o campo oculto "shoppingselect" com o valor selecionado do shopping
-            document.getElementById('shoppingselect').value = selectedValue;
+            // Envia os dados para o servidor
+            enviarDados(username, selectedOption, codigos);
         } else {
             console.error("Elemento shoppingSelect não encontrado.");
-            return; // Sai da função se o elemento shoppingSelect não for encontrado
         }
-
-        // Envia o formulário
-        document.getElementById('barcodeForm').submit();
     });
 });
 
+// Função para enviar os dados para o servidor
+function enviarDados(username, selectedOption, codigos) {
+    // Cria um objeto FormData
+    const formData = new FormData();
+    formData.append('username', username);
+    formData.append('shoppingselect', selectedOption);
+    formData.append('codigo', codigos);
+
+    // Configura a requisição AJAX
+    const request = new XMLHttpRequest();
+    request.open('POST', 'URL_DO_SEU_SCRIPT_GOOGLE_APPS_SCRIPT', true);
+
+    // Define a função de callback para lidar com a resposta do servidor
+    request.onload = function () {
+        if (request.status >= 200 && request.status < 400) {
+            // Limpa o campo de entrada de códigos após o envio bem-sucedido
+            document.getElementById('codeInput').value = '';
+            // Exibe uma mensagem de sucesso para o usuário
+            alert("Códigos enviados com sucesso!");
+        } else {
+            // Exibe uma mensagem de erro caso ocorra algum problema no servidor
+            alert("Ocorreu um erro ao enviar os códigos. Por favor, tente novamente mais tarde.");
+        }
+    };
+
+    // Envia a requisição AJAX com os dados do formulário
+    request.send(formData);
+}
 
 
 // Inicia o leitor de código de barras ao carregar o documento HTML
