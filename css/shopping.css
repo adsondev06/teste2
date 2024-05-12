@@ -4,9 +4,10 @@ body {
     padding: 0;
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
+    margin-top: 150px;
+    height: 150px;
     background-color: #f5f5f5;
+    overflow: hidden;
 }
 
 #seunome {
