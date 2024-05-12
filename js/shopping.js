@@ -8,17 +8,18 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
+document.addEventListener('DOMContentLoaded', function() {
+    $('.select2').select2();
+});
+
 document.getElementById('shoppingForm').addEventListener('submit', function(event) {
     event.preventDefault();
     
     // Captura o valor selecionado no select
-    const selectedOption = document.querySelector('.select2').value;
+    const selectedOption = document.getElementById('shoppingSelect').value;
     
-    // Cria a URL com o valor selecionado como parâmetro
-    const nextPageURL = `codigos.html?shopping=${selectedOption}`;
-    
-    // Redireciona para a próxima página com o parâmetro
-    window.location.href = nextPageURL;
+    // Redireciona para a próxima página com o parâmetro na URL
+    window.location.href = `codigos.html?shopping=${selectedOption}`;
 });
 
 
