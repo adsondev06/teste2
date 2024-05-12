@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/shopping.css">
+    <title>Shopping coleta</title>
+</head>
+<body>
+    <div class="custom-select">
+        <form action="codigos.html">
+            <p>Selecione o shopping de coleta</p>
+            <input type="text" name="seunome" id="seunome">
+            <select class="select2">
+              <option value="0">Selecione</option>
+              <option value="1">Adson</option>
+              <option value="2">Besta</option>
+              <option value="3">Cuzao</option>
+              <option value="4">Dindo</option>
+              <option value="5">Eldorado</option>
+              <option value="6">F</option>
+              <option value="7">G</option>
+              <option value="8">H</option>
+              <option value="9">I</option>
+              <option value="10">G</option>
+              <option value="11">K</option>
+              <option value="12">L</option>
+              <option value="13">M</option>
+              <option value="15">N</option>
+              <option value="16">O</option>
+              <option value="17">P</option>
+              <option value="18">Q</option>
+              <option value="19">R</option>
+              <option value="20">S</option>
+            </select>
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+    $('.select2').select2();
+    });
+    </script>
+    <script src="js/shopping.js"></script>
+</body>
+</html>

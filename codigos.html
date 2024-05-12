@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/estilos.css">
+    <title>Coletor</title>
+    <style>
+        /* Layout da página */
+        
+    </style>
+</head>
+<body>
+    <!-- Seção dos resultados de leitura -->
+    <form id="barcodeForm" action="https://script.google.com/macros/s/AKfycby2cMJZOk67qMFqezn-yaadByGBH25ZK_7WN7K3r3xMwZx6uJLWERDNnXHX1tA6o04/exec" method="post" class="form-container">
+        <p class="alerta">Se não iniciar a leitura, atualize a página!</p>
+        <video id="video" playsinline></video>
+        <input type="number" name="codigo" id="codeInput" placeholder="Não escaneou, digite aqui"/>
+        <div id="barcode-results"></div>
+        <p id="codeCount">Códigos lidos: <span id="count">0</span></p>
+        <div class="button-container">
+            <button id="reloadButton" class="button" onclick="reloadPage()">Atualizar Página</button>
+            <!-- Botão de Enviar Códigos -->
+            <button type="submit" id="sendCodesButton" class="button">Enviar Códigos</button>
+        </div>
+    </form>
+
+    <!-- Elementos de áudio para feedback -->
+    <audio id="successSound" src="audio/sucesso.mp3"></audio>
+    <audio id="errorSound" src="audio/error-126627.mp3"></audio>
+
+    <!-- Script JavaScript personalizado -->
+    <script src="js/script.js"></script>
+    
+    <script>
+        // Função para filtrar as opções do datalist conforme o texto digitado
+        function filterOptions(event) {
+            var input, filter, datalist, options, i, txtValue;
+            input = event.target;
+            filter = input.value.toUpperCase();
+            datalist = input.list;
+            options = datalist.options;
+            for (i = 0; i < options.length; i++) {
+                txtValue = options[i].textContent || options[i].innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    options[i].style.display = "";
+                } else {
+                    options[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+</body>
+</html>
