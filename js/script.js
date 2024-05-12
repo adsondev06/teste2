@@ -164,12 +164,15 @@ document.addEventListener("DOMContentLoaded", function() {
         if (selectedOption) {
             const selectedValue = selectedOption.value;
             
-            // Envia o formulário com o valor selecionado do shopping
+            // Preenche o campo oculto "shoppingselect" com o valor selecionado do shopping
             document.getElementById('shoppingselect').value = selectedValue;
-            document.getElementById('barcodeForm').submit();
         } else {
             console.error("Elemento shoppingSelect não encontrado.");
+            return; // Sai da função se o elemento shoppingSelect não for encontrado
         }
+
+        // Envia o formulário
+        document.getElementById('barcodeForm').submit();
     });
 });
 
