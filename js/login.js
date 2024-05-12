@@ -35,6 +35,6 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
     // Salvar o tempo de expiração no localStorage
     localStorage.setItem('expirationDate', expirationDate);
 
-    // Redirecionar para o indexform.html
+    // Redirecionar para o shopping.html
     window.location.href = 'shopping.html';
 });
