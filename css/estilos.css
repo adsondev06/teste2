@@ -20,10 +20,25 @@ body {
     overflow: hidden;
 }
 
+#barcode-results {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #fff;
+    border: 2px solid #333;
+    border-radius: 10px;
+    color: #333;
+    text-align: center;
+    max-height: 50px;
+    overflow-y: auto;
+}
+
 #video {
     width: 100%;
     max-width: 350px;
     height: auto;
+    object-fit: cover;
+    border: 2px solid #000000;
+    border-radius: 10px;
 }
 
 /* Estilo do campo de entrada */
