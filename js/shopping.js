@@ -40,9 +40,17 @@ document.addEventListener("DOMContentLoaded", function() {
         event.preventDefault();
         
         // Captura o valor selecionado no select
-        const selectedOption = document.getElementById('shoppingSelect').value;
+        const selectedOption = document.getElementById('shoppingSelect');
         
-        // Redireciona para a próxima página com o parâmetro na URL
-        window.location.href = `codigos.html?shopping=${selectedOption}`;
+        // Verifica se o elemento foi encontrado antes de acessar sua propriedade value
+        if (selectedOption) {
+            const selectedValue = selectedOption.value;
+            
+            // Redireciona para a próxima página com o parâmetro na URL
+            window.location.href = `codigos.html?shopping=${selectedValue}`;
+        } else {
+            console.error("Elemento shoppingSelect não encontrado.");
+        }
     });
 });
+
