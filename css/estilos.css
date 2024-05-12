@@ -19,7 +19,9 @@ body {
 }
 
 #video {
-    width: 300px;
+    width: 100%;
+    max-width: 350px;
+    height: auto;
 }
 
 /* Estilo do campo de entrada */
