@@ -28,7 +28,6 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
     // Salvar o nome do usuário no localStorage
     localStorage.setItem('username', username);
 
-    // Definir o tempo de expiração para 8 horas (em milissegundos)
     const expirationTime = 6 * 60 * 60 * 1000; // 8 horas
     const expirationDate = new Date().getTime() + expirationTime;
 
