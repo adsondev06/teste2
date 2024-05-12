@@ -1,6 +1,9 @@
+
 // Captura os elementos do HTML
 const barcodeResults = document.getElementById('barcode-results');
 const codeCount = document.getElementById('count');
+const successSound = document.getElementById('successSound');
+const errorSound = document.getElementById('errorSound');
 const codeInput = document.getElementById('codeInput');
 let detectedBarcodes = [];
 let codeCounter = 0;
@@ -13,7 +16,7 @@ async function startBarcodeReader() {
         const video = document.getElementById('video');
         video.srcObject = stream;
         await video.play();
-        setInterval(readBarcode, 1500); // Escaneia a cada 1.5 segundos
+        setInterval(readBarcode, 1500); // Escaneia a cada 3 segundos
     } catch (error) {
         console.error('Erro ao iniciar a leitura do código de barras:', error);
         displayMessage('Erro ao iniciar a leitura do código de barras.', 'error');
@@ -29,7 +32,16 @@ async function readBarcode() {
         if (barcodes.length > 0) {
             barcodes.forEach(barcode => {
                 if (barcode.rawValue.length === 10) {
-                    if (!detectedBarcodes.includes(barcode.rawValue)) {
+                    if (detectedBarcodes.includes(barcode.rawValue)) {
+                        if (!errorDisplayed) {
+                            displayMessage('Código de barras já lido.', 'error');
+                            playErrorSound();
+                            errorDisplayed = true;
+                        }
+                    } else {
+                        if (errorDisplayed) {
+                            clearError();
+                        }
                         detectedBarcodes.push(barcode.rawValue);
                         const resultDiv = document.createElement('div');
                         const lastFourDigits = barcode.rawValue.slice(-4);
@@ -38,6 +50,7 @@ async function readBarcode() {
                         resultDiv.classList.add('success');
                         barcodeResults.appendChild(resultDiv);
                         codeCount.textContent = detectedBarcodes.length;
+                        playSuccessSound();
                         codeCounter++;
                         if (codeCounter === 3) {
                             barcodeResults.style.overflowY = 'scroll';
@@ -58,6 +71,16 @@ function sendCodes() {
     textarea.value = detectedBarcodes.join('\n'); // Adiciona os códigos lidos ao textarea do formulário
 }
 
+// Função para reproduzir o som de sucesso
+function playSuccessSound() {
+    successSound.play();
+}
+
+// Função para reproduzir o som de erro
+function playErrorSound() {
+    errorSound.play();
+}
+
 // Função para exibir uma mensagem na seção de resultados
 function displayMessage(message, type) {
     const messageDiv = document.createElement('div');
@@ -76,6 +99,21 @@ function clearError() {
     }
 }
 
+function toggleForm() {
+    var overlay = document.getElementById("form-overlay");
+    overlay.style.display = overlay.style.display === "none" ? "block" : "none";
+}
+
+
+// Função para buscar o valor do localStorage e definir no input "seunome"
+document.addEventListener('DOMContentLoaded', function() {
+    var nomeInput = document.getElementById('seunome');
+    var nomePadrao = localStorage.getItem('username');
+    if (nomePadrao) {
+        nomeInput.value = nomePadrao;
+    }
+});
+
 // Função para recarregar a página
 function reloadPage() {
     window.location.reload();
@@ -92,12 +130,14 @@ codeInput.addEventListener('keyup', function(event) {
             resultDiv.classList.add('success');
             barcodeResults.appendChild(resultDiv);
             codeCount.textContent = detectedBarcodes.length;
+            playSuccessSound();
             codeCounter++;
             if (codeCounter === 2) {
                 barcodeResults.style.overflowY = 'scroll';
             }
         } else {
             displayMessage('Valor inválido ou já inserido.', 'error');
+            playErrorSound();
         }
         this.value = '';
     }
@@ -107,17 +147,3 @@ codeInput.addEventListener('keyup', function(event) {
 document.addEventListener('DOMContentLoaded', function() {
     startBarcodeReader();
 });
-
-document.addEventListener('DOMContentLoaded', function() {
-    // Obtém o valor do parâmetro 'shopping' da URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const shoppingValue = urlParams.get('shopping');
-    
-    // Preenche o input com o valor obtido
-    document.getElementById('shoppingselect').value = shoppingValue;
-});
-
-
-
-
-
