@@ -24,9 +24,8 @@ body {
     margin-top: 20px;
     padding: 10px;
     background-color: #fff;
-    border: 2px solid #333;
+    border: 2px solid #4d4c4c;
     border-radius: 10px;
-    color: #333;
     text-align: center;
     max-height: 50px;
     overflow-y: auto;
@@ -46,10 +45,16 @@ body {
     width: calc(100% - 20px);
     padding: 10px;
     margin-bottom: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #000000;
     border-radius: 5px;
     font-size: 16px;
     transition: border-color 0.3s ease;
+}
+
+::placeholder {
+    text-align: center;
+    font-weight: 700;
+    color: #000000;
 }
 
 #codeInput:focus {
